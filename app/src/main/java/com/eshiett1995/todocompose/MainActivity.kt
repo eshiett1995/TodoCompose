@@ -1,5 +1,6 @@
 package com.eshiett1995.todocompose
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -14,15 +15,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 class MainActivity : AppCompatActivity() {
 
+    private var poppinsRegularFont = Font(resId = R.font.poppins_regular)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,7 +32,11 @@ class MainActivity : AppCompatActivity() {
             Scaffold(
                 floatingActionButton = {
                     FloatingActionButton(
-                        onClick = {},
+                        onClick = {
+                            Intent(this, AddTaskActivity::class.java).run {
+                                startActivity(this)
+                            }
+                        },
                         backgroundColor = Color.Blue,
                         contentColor = Color.White
                     ){
@@ -45,7 +51,12 @@ class MainActivity : AppCompatActivity() {
                         .fillMaxHeight()
                 ) {
                     Column (modifier = Modifier.padding(horizontal = 20.dp, vertical = 20.dp)) {
-                        Text("Hello", color = Color.White, fontSize = 25.sp)
+                        Text(
+                            "Hello",
+                            color = Color.White,
+                            fontSize = 25.sp,
+                            fontFamily = FontFamily(poppinsRegularFont)
+                        )
                         Text("Thursday, February 6", color = Color.White)
                         Spacer(modifier = Modifier.height(30.dp))
                         TaskCard()
