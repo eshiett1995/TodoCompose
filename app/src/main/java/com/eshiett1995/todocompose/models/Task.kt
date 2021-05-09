@@ -1,4 +1,6 @@
 package com.eshiett1995.todocompose.models
 
-class Task {
+import androidx.lifecycle.ViewModel
+
+class Task : ViewModel(){
 }

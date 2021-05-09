@@ -18,7 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddTaskActivity"/>
+        <activity
+            android:name=".AddTaskActivity"
+            android:theme="@style/Theme.TodoCompose.NoActionBar"
+            />
     </application>
 
 </manifest>
