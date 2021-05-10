@@ -8,5 +8,5 @@ import com.eshiett1995.todocompose.data.entity.Task
 interface TaskDao {
 
     @Insert
-    fun save(task : Task) : Task
+    fun save(task : Task)
 }
