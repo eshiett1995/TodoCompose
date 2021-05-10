@@ -1,4 +1,4 @@
-package com.eshiett1995.todocompose
+package com.eshiett1995.todocompose.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.eshiett1995.todocompose.R
 
 class MainActivity : AppCompatActivity() {
 

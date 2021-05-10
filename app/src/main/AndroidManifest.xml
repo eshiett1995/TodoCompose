@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TodoCompose">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:theme="@style/Theme.TodoCompose.NoActionBar"
             android:exported="true">
             <intent-filter>
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddTaskActivity"
+            android:name=".activities.AddTaskActivity"
             android:theme="@style/Theme.TodoCompose.NoActionBar"
             />
     </application>

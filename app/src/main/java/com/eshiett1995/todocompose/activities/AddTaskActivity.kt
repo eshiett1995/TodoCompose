@@ -1,4 +1,4 @@
-package com.eshiett1995.todocompose
+package com.eshiett1995.todocompose.activities
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
