@@ -1,6 +1,5 @@
-package com.eshiett1995.todocompose.data
+package com.eshiett1995.todocompose.data.entity
 
-import androidx.lifecycle.ViewModel
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
