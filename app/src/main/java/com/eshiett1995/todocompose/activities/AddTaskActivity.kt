@@ -2,6 +2,7 @@ package com.eshiett1995.todocompose.activities
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.annotation.Dimension.DP
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
@@ -16,7 +17,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.eshiett1995.todocompose.R
+import com.eshiett1995.todocompose.viewModels.AddTaskViewModel
 
 class AddTaskActivity : AppCompatActivity() {
 
@@ -24,6 +27,8 @@ class AddTaskActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val addTaskViewModel : AddTaskViewModel by viewModels()
         setContent {
             val textFieldShape = RoundedCornerShape(5.dp)
             val textFieldColors = TextFieldDefaults.textFieldColors(
@@ -49,15 +54,21 @@ class AddTaskActivity : AppCompatActivity() {
                 )
                 Spacer(modifier = Modifier.height(25.dp))
                 TextField(
-                    modifier = Modifier.fillMaxWidth().height(100.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(100.dp),
                     value = "", onValueChange = { },
                     shape = textFieldShape,
                     colors = textFieldColors
                 )
                 Spacer(modifier = Modifier.height(25.dp))
                 Button(
-                    onClick = {},
-                    modifier = Modifier.fillMaxWidth().height(65.dp),
+                    onClick = {
+                        addTaskViewModel.saveTask()
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(65.dp),
                     elevation = ButtonDefaults.elevation(
                         defaultElevation = Dp(0f)
                     )

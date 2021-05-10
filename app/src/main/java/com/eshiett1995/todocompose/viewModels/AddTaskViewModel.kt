@@ -1,4 +1,5 @@
 package com.eshiett1995.todocompose.viewModels
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
@@ -7,6 +8,6 @@ class AddTaskViewModel : ViewModel() {
     var detail : MutableLiveData<String> = MutableLiveData("")
 
     fun saveTask(){
-
+            Log.i("hello from here", "Logger")
     }
 }
