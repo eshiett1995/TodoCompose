@@ -12,7 +12,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun taskDao() : TaskDao
     companion object{
-        private var INSTANCE: AppDatabase? = null
+        var INSTANCE: AppDatabase? = null
         fun getAppDatabase(context: Context): AppDatabase? {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(
