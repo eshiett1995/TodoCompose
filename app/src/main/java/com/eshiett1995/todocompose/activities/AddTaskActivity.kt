@@ -9,10 +9,15 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -20,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.eshiett1995.todocompose.R
 import com.eshiett1995.todocompose.viewModels.AddTaskViewModel
+
 
 class AddTaskActivity : AppCompatActivity() {
 
@@ -30,7 +36,10 @@ class AddTaskActivity : AppCompatActivity() {
 
         val addTaskViewModel : AddTaskViewModel by viewModels()
         setContent {
+            val title : State<String> = addTaskViewModel.title.observeAsState("")
+            val textState = remember { mutableStateOf(TextFieldValue()) }
             val textFieldShape = RoundedCornerShape(5.dp)
+
             val textFieldColors = TextFieldDefaults.textFieldColors(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent
@@ -43,14 +52,16 @@ class AddTaskActivity : AppCompatActivity() {
                     fontFamily = FontFamily(poppinsRegularFont),
                 )
                 Spacer(modifier = Modifier.height(20.dp))
+
                 TextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = "", onValueChange = { },
+                    value = title.value,
+                    onValueChange = {
+                        addTaskViewModel.changeTitle(it)
+                    },
                     shape = textFieldShape,
                     colors = textFieldColors,
-                    label = {
-                        Text("Add a title",)
-                    }
+                    label = { Text("Add a title",) }
                 )
                 Spacer(modifier = Modifier.height(25.dp))
                 TextField(

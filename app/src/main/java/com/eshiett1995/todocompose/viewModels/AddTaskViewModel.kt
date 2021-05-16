@@ -16,4 +16,8 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
     fun saveTask(){
         AppDatabase.getAppDatabase(context)?.taskDao()
     }
+
+    fun changeTitle(text: String){
+        title.value = text
+    }
 }
