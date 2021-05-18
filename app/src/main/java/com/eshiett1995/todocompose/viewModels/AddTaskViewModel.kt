@@ -1,5 +1,6 @@
 package com.eshiett1995.todocompose.viewModels
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.eshiett1995.todocompose.data.AppDatabase
@@ -14,9 +15,10 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
     var detail : MutableLiveData<String> = MutableLiveData("")
 
     fun saveTask(){
-        val task = Task(id = 0, title = title.value!!, detail = detail.value!! )
+        val task = Task(id = 1, title = title.value!!, detail = detail.value!! )
         val taskDao : TaskDao? = AppDatabase.getAppDatabase(context)?.taskDao()
-        taskDao!!.save(task)
+        taskDao!!.insertAll(task)
+        Toast.makeText(context, "it is done", Toast.LENGTH_LONG).show()
     }
 
     fun changeTitle(text: String){
