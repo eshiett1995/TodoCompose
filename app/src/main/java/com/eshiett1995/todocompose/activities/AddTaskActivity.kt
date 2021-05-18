@@ -1,6 +1,7 @@
 package com.eshiett1995.todocompose.activities
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.annotation.Dimension.DP
@@ -24,6 +25,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.eshiett1995.todocompose.R
+import com.eshiett1995.todocompose.data.AppDatabase
+import com.eshiett1995.todocompose.data.dao.TaskDao
+import com.eshiett1995.todocompose.data.entity.Task
 import com.eshiett1995.todocompose.viewModels.AddTaskViewModel
 
 
@@ -35,6 +39,7 @@ class AddTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val addTaskViewModel : AddTaskViewModel by viewModels()
+        val context = this
         setContent {
             val title : State<String> = addTaskViewModel.title.observeAsState("")
             val detail : State<String> = addTaskViewModel.detail.observeAsState("")
@@ -79,7 +84,10 @@ class AddTaskActivity : AppCompatActivity() {
                 Spacer(modifier = Modifier.height(25.dp))
                 Button(
                     onClick = {
-                        addTaskViewModel.saveTask()
+                        val task = Task(id = 1, title = title.value!!, detail = detail.value!! )
+                        val taskDao : TaskDao? = AppDatabase.getAppDatabase(context)?.taskDao()
+                        taskDao!!.insertAll(task)
+                        Toast.makeText(context, "it is done", Toast.LENGTH_LONG).show()
                     },
                     modifier = Modifier
                         .fillMaxWidth()
