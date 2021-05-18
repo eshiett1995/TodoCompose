@@ -20,4 +20,8 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
     fun changeTitle(text: String){
         title.value = text
     }
+
+    fun changeDetail(text: String){
+        detail.value = text
+    }
 }

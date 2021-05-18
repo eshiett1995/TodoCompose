@@ -37,7 +37,8 @@ class AddTaskActivity : AppCompatActivity() {
         val addTaskViewModel : AddTaskViewModel by viewModels()
         setContent {
             val title : State<String> = addTaskViewModel.title.observeAsState("")
-            val textState = remember { mutableStateOf(TextFieldValue()) }
+            val detail : State<String> = addTaskViewModel.detail.observeAsState("")
+
             val textFieldShape = RoundedCornerShape(5.dp)
 
             val textFieldColors = TextFieldDefaults.textFieldColors(
@@ -68,7 +69,10 @@ class AddTaskActivity : AppCompatActivity() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(100.dp),
-                    value = "", onValueChange = { },
+                    value = detail.value,
+                    onValueChange = {
+                        addTaskViewModel.changeDetail(it)
+                    },
                     shape = textFieldShape,
                     colors = textFieldColors
                 )
