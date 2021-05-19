@@ -29,6 +29,7 @@ import com.eshiett1995.todocompose.data.AppDatabase
 import com.eshiett1995.todocompose.data.dao.TaskDao
 import com.eshiett1995.todocompose.data.entity.Task
 import com.eshiett1995.todocompose.viewModels.AddTaskViewModel
+import kotlinx.coroutines.runBlocking
 
 
 class AddTaskActivity : AppCompatActivity() {
@@ -84,9 +85,9 @@ class AddTaskActivity : AppCompatActivity() {
                 Spacer(modifier = Modifier.height(25.dp))
                 Button(
                     onClick = {
-                        val task = Task(id = 1, title = title.value!!, detail = detail.value!! )
-                        val taskDao : TaskDao? = AppDatabase.getAppDatabase(context)?.taskDao()
-                        taskDao!!.insertAll(task)
+                        runBlocking {
+                            addTaskViewModel.saveTask()
+                        }
                         Toast.makeText(context, "it is done", Toast.LENGTH_LONG).show()
                     },
                     modifier = Modifier

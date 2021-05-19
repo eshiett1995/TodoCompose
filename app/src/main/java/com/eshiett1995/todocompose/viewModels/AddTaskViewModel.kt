@@ -14,7 +14,7 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
     var title : MutableLiveData<String> = MutableLiveData("")
     var detail : MutableLiveData<String> = MutableLiveData("")
 
-    fun saveTask(){
+    suspend fun saveTask(){
         val task = Task(title = title.value!!, detail = detail.value!! )
         val taskDao : TaskDao? = AppDatabase.getAppDatabase(context)?.taskDao()
         taskDao!!.insertAll(task)
