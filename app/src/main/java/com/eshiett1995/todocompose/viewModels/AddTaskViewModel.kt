@@ -15,7 +15,7 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
     var detail : MutableLiveData<String> = MutableLiveData("")
 
     fun saveTask(){
-        val task = Task(id = 1, title = title.value!!, detail = detail.value!! )
+        val task = Task(title = title.value!!, detail = detail.value!! )
         val taskDao : TaskDao? = AppDatabase.getAppDatabase(context)?.taskDao()
         taskDao!!.insertAll(task)
         Toast.makeText(context, "it is done", Toast.LENGTH_LONG).show()
