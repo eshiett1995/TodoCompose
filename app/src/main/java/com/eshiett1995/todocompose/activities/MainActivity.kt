@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.eshiett1995.todocompose.R
+import com.eshiett1995.todocompose.data.entity.Task
 import com.eshiett1995.todocompose.viewModels.AddTaskViewModel
 import com.eshiett1995.todocompose.viewModels.ViewTasksViewModel
 
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         val viewTasksViewModel : ViewTasksViewModel by viewModels()
 
         setContent{
-            var tasks = viewTasksViewModel.tasks.observeAsState()
+            val tasks = viewTasksViewModel.tasks.observeAsState()
             Scaffold(
                 floatingActionButton = {
                     FloatingActionButton(
@@ -67,19 +68,19 @@ class MainActivity : AppCompatActivity() {
                         )
                         Text("Thursday, February 6", color = Color.White)
                         Spacer(modifier = Modifier.height(30.dp))
-                        tasks.value.forEach {
-
+                        if(tasks.value != null){
+                            tasks.value!!.forEach { task ->
+                                TaskCard(task)
+                            }
                         }
-                        TaskCard()
                     }
                 }
             }
         }
     }
 
-    @Preview
     @Composable
-    fun TaskCard(){
+    fun TaskCard(task : Task){
       Card (
           backgroundColor = Color.White,
       ){
@@ -92,7 +93,7 @@ class MainActivity : AppCompatActivity() {
              CustomCheckBox()
              Spacer(modifier = Modifier.width(10.dp))
              Column {
-                 Text("screen shot for Todo App")
+                 Text(task.title)
                  Row{
                      Text("Tasks.")
                      Text("Friday, Feb 7, 9:00AM")
